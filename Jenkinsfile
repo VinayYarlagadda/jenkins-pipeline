@@ -6,9 +6,9 @@ def HTTP_PORT="8090"
 node {
 
     stage('Initialize'){
-        def dockerHome = tool 'myDocker'
-        def mavenHome  = tool 'myMaven'
-        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+       //def dockerHome = tool 'myDocker'
+       //def mavenHome  = tool 'myMaven'
+       //env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
     }
 
     stage('Checkout') {
@@ -19,13 +19,13 @@ node {
         sh "mvn clean install"
     }
 
-    stage('Sonar'){
+    /stage('Sonar'){
         try {
             sh "mvn sonar:sonar"
         } catch(error){
             echo "The sonar server could not be reached ${error}"
         }
-     }
+     }*/ 
 
     stage("Image Prune"){
         imagePrune(CONTAINER_NAME)
